@@ -1,6 +1,7 @@
 package com.example.Online.Banking.System.auth;
 
 import com.example.Online.Banking.System.config.JwtService;
+import com.example.Online.Banking.System.exception.EmailAlreadyExistsException;
 import com.example.Online.Banking.System.user.Role;
 import com.example.Online.Banking.System.user.User;
 import com.example.Online.Banking.System.user.UserRepository;
@@ -19,6 +20,12 @@ public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
 
     public AuthenticationResponse register(RegisterRequest request) {
+
+        // Check if email already exists
+        if (userRepository.existsByEmail(request.getEmail())) {
+            throw new EmailAlreadyExistsException("Email " + request.getEmail() + " already exists");
+        }
+
         var user = User.builder()
                 .firstName(request.getFirstName())
                 .lastName(request.getLastName())
