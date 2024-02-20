@@ -1,10 +1,13 @@
-package com.example.Online.Banking.System.auth;
+package com.example.Online.Banking.System.auth.service;
 
+import com.example.Online.Banking.System.auth.dto.AuthenticationRequest;
+import com.example.Online.Banking.System.auth.dto.AuthenticationResponse;
+import com.example.Online.Banking.System.auth.dto.RegisterRequest;
 import com.example.Online.Banking.System.config.JwtService;
 import com.example.Online.Banking.System.exception.EmailAlreadyExistsException;
-import com.example.Online.Banking.System.user.Role;
-import com.example.Online.Banking.System.user.User;
-import com.example.Online.Banking.System.user.UserRepository;
+import com.example.Online.Banking.System.user.enums.Role;
+import com.example.Online.Banking.System.user.entity.User;
+import com.example.Online.Banking.System.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

@@ -1,4 +1,4 @@
-package com.example.Online.Banking.System.auth;
+package com.example.Online.Banking.System.auth.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

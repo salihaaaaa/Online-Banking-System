@@ -1,6 +1,6 @@
 package com.example.Online.Banking.System.config;
 
-import com.example.Online.Banking.System.user.UserRepository;
+import com.example.Online.Banking.System.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

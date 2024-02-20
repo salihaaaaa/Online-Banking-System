@@ -1,6 +1,7 @@
-package com.example.Online.Banking.System.user;
+package com.example.Online.Banking.System.user.entity;
 
-import com.example.Online.Banking.System.account.Account;
+import com.example.Online.Banking.System.account.entity.Account;
+import com.example.Online.Banking.System.user.enums.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
