@@ -22,4 +22,30 @@ public class ApiExceptionHandler {
 
         return  new ResponseEntity<>(apiException, conflict);
     }
+
+    @ExceptionHandler(value = IdNotFoundException.class)
+    public ResponseEntity<Object> handleIdNotFoundException(IdNotFoundException exception) {
+        HttpStatus notFound = HttpStatus.NOT_FOUND;
+
+        ApiException apiException =  new ApiException(
+                exception.getMessage(),
+                notFound,
+                ZonedDateTime.now(ZoneId.of("Z"))
+        );
+
+        return  new ResponseEntity<>(apiException, notFound);
+    }
+
+    @ExceptionHandler(value = AccountNotFoundException.class)
+    public ResponseEntity<Object> handleIdAccountNotFoundException(AccountNotFoundException exception) {
+        HttpStatus notFound = HttpStatus.NOT_FOUND;
+
+        ApiException apiException =  new ApiException(
+                exception.getMessage(),
+                notFound,
+                ZonedDateTime.now(ZoneId.of("Z"))
+        );
+
+        return  new ResponseEntity<>(apiException, notFound);
+    }
 }
