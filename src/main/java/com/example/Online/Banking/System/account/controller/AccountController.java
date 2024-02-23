@@ -32,10 +32,16 @@ public class AccountController {
         return new ResponseEntity<>(allAccounts, HttpStatus.OK);
     }
 
-    @GetMapping("/userid={userId}")
+    @GetMapping("/user-id={userId}")
     public ResponseEntity<List<AccountResponse>> getAccountsByUserId(@PathVariable("userId") Long userId) {
         List<AccountResponse> allAccounts = accountService.getAccountByUserId(userId);
         return new ResponseEntity<>(allAccounts, HttpStatus.OK);
+    }
+
+    @GetMapping("/account-number={accountNumber}")
+    public ResponseEntity<AccountResponse> getAccountsByAccountNumber(@PathVariable("accountNumber") Long accountNumber) {
+        AccountResponse account = accountService.getAccountByAccountNumber(accountNumber);
+        return new ResponseEntity<>(account, HttpStatus.OK);
     }
 
     @DeleteMapping("/close/{accountId}")
