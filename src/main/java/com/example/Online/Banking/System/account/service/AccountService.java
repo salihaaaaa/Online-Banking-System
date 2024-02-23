@@ -75,6 +75,16 @@ public class AccountService {
                  .collect(Collectors.toList());
     }
 
+    public AccountResponse getAccountByAccountNumber(Long accountNumber) {
+        Account account = accountRepository.findByAccountNumber(accountNumber);
+
+        if (account == null) {
+            throw new AccountNotFoundException("No account found for account number " + accountNumber);
+        }
+
+        return mapToAccountResponse(account);
+    }
+
     public AccountResponse closeAccount(Long accountId) {
         Account account = accountRepository.findById(accountId)
                 .orElseThrow(() -> new AccountNotFoundException("No account found for id " + accountId));
