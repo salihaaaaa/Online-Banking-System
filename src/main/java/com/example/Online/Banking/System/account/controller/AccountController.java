@@ -2,6 +2,8 @@ package com.example.Online.Banking.System.account.controller;
 
 import com.example.Online.Banking.System.account.dto.AccountRequest;
 import com.example.Online.Banking.System.account.dto.AccountResponse;
+import com.example.Online.Banking.System.account.dto.TransferRequest;
+import com.example.Online.Banking.System.account.dto.TransferResponse;
 import com.example.Online.Banking.System.account.entity.Account;
 import com.example.Online.Banking.System.account.repository.AccountRepository;
 import com.example.Online.Banking.System.account.service.AccountService;
@@ -47,6 +49,13 @@ public class AccountController {
     @DeleteMapping("/close/{accountId}")
     public ResponseEntity<AccountResponse> closeAccount(@PathVariable() Long accountId) {
         AccountResponse account = accountService.closeAccount(accountId);
+        return new ResponseEntity<>(account, HttpStatus.OK);
+    }
+
+    @PostMapping("/transfer")
+    public ResponseEntity<TransferResponse> transfer(@RequestBody TransferRequest transferRequest) {
+        TransferResponse account = accountService.transfer(transferRequest);
+
         return new ResponseEntity<>(account, HttpStatus.OK);
     }
 }
