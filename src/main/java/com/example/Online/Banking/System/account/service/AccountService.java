@@ -2,6 +2,8 @@ package com.example.Online.Banking.System.account.service;
 
 import com.example.Online.Banking.System.account.dto.AccountRequest;
 import com.example.Online.Banking.System.account.dto.AccountResponse;
+import com.example.Online.Banking.System.account.dto.TransferRequest;
+import com.example.Online.Banking.System.account.dto.TransferResponse;
 import com.example.Online.Banking.System.account.entity.Account;
 import com.example.Online.Banking.System.account.enums.Status;
 import com.example.Online.Banking.System.account.repository.AccountRepository;
@@ -12,6 +14,7 @@ import com.example.Online.Banking.System.user.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.ThreadLocalRandom;
@@ -85,6 +88,23 @@ public class AccountService {
         return mapToAccountResponse(account);
     }
 
+    public TransferResponse transfer(TransferRequest transferRequest) {
+        Account sourceAccount = accountRepository.findByAccountNumber(transferRequest.getSourceAccountNumber());
+        Account destinationAccount = accountRepository.findByAccountNumber(transferRequest.getDestinationAccountNumber());
+
+        if (sourceAccount.getBalance() < transferRequest.getAmount()) {
+            throw new IllegalStateException("Insufficient balance");
+        }
+
+        sourceAccount.setBalance(sourceAccount.getBalance() - transferRequest.getAmount());
+        destinationAccount.setBalance(destinationAccount.getBalance() + transferRequest.getAmount());
+
+        accountRepository.save(sourceAccount);
+        accountRepository.save(destinationAccount);
+
+        return new TransferResponse(sourceAccount.getAccountNumber(), destinationAccount.getAccountNumber(), sourceAccount.getBalance());
+    }
+
     public AccountResponse closeAccount(Long accountId) {
         Account account = accountRepository.findById(accountId)
                 .orElseThrow(() -> new AccountNotFoundException("No account found for id " + accountId));
@@ -110,6 +130,7 @@ public class AccountService {
         // Generate a random 10-digit account number
         return ThreadLocalRandom.current().nextLong(1_000_000_000_0L, 9_999_999_999_9L);
     }
+
 
 
 }
