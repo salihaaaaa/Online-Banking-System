@@ -13,7 +13,7 @@ This is an online banking system application that provides functionalities to ma
 - **Account Management**:
   - Create a new account with an initial deposit.
   - Check account balance.
-  - Transfer funds between accounts.
+  - Transfer between accounts.
   - Close an account.
 
 ## Technologies Used
